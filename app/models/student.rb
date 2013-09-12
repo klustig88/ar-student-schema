@@ -7,6 +7,9 @@ class Student < ActiveRecord::Base
   validates :age, :numericality => { greater_than: 5 }
   validates :phone, format: { with: /.{10}/, message: 'Beep!' }
 
+  has_many :students_teachers, foreign_key: :student_id
+  has_many :teachers, through: :students_teachers
+
   def name
     first_name + " " + last_name
   end
